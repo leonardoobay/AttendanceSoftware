@@ -30,36 +30,55 @@
 <body>
 	<div class="div-container">
 		<c:choose>
-			<c:when test="${empty swipe}">
-				<form class="form-inline" action="Swipe" method="post">
-					<input class ="btn btn-primary" name="swipe" placeholder="New Swipe" type="password">
-				</form>
-				<ol>
-					<li>Click "New Swipe"</li>
-					<li>Swipe Student ID Card</li>
-				</ol>
+			<c:when test="${empty settingError}">
+				<c:choose>
+					<c:when test="${empty swipe}">
+						<p>${swipeError}</p>
+						<form class="form-inline" action="Swipe" method="post">
+							<input class ="btn btn-success" name="swipe" placeholder="New Swipe" type="password">
+						</form>
+						<ol>
+							<li>Click "New Swipe"</li>
+							<li>Swipe Student ID Card</li>
+						</ol>
+					</c:when>
+					
+					<c:otherwise>
+						<br/>
+						<div class="jumbotron">
+							<p>Verify the information below:</p>
+							<p>${swipe.firstName}</p>
+							<p>${swipe.lastName}</p>
+							<p>${swipe.cin}</p>
+							<p>${status}</p>
+						</div>
+						
+						<div class="form-container">
+							<form class="form-inline" action="checkIn" method="post">
+								<input type="hidden" name="firstName" value="${swipe.firstName}">
+								<input type="hidden" name="lastName" value="${swipe.lastName}">
+								<input type="hidden" name="cin" value="${swipe.cin}">
+								<input class="btn btn-success" type="submit" value="Yes,This is me" autofocus>
+							</form>
+							<form class="form-inline" action="Swipe" method="post">
+								<input type="hidden" name="swipe" value="">
+								<input class="btn btn-danger" type="submit" value="No,This is not me">
+							</form>
+						</div>
+					</c:otherwise>
+				</c:choose>
 			</c:when>
 			<c:otherwise>
 				<br/>
 				<div class="jumbotron">
-					<p>Verify the information below:</p>
-					<p>${swipe.firstName}</p>
-					<p>${swipe.lastName}</p>
-					<p>${swipe.cin}</p>
+					<p>${settingError}</p>
 				</div>
-				
-				<div class="form-container">
-					<form class="form-inline" action="checkIn" method="post">
-						<input type="hidden" name="swipe" value=${swipe}>
-						<input class="btn btn-success" type="submit" value="Yes,This is me">
-					</form>
-					<form class="form-inline" action="Swipe" method="post">
-						<input type="hidden" name="swipe" value="">
-						<input class="btn btn-danger" type="submit" value="No,This is not me">
-					</form>
-				</div>
+				<button class="btn btn-success"><a href="../Swipe">OK</a></button>
 			</c:otherwise>
 		</c:choose>
+		<div>
+			<a href="Settings"><button class="btn btn-primary">Settings</button></a>
+		</div>
 	</div>
 </body>
 </html>
