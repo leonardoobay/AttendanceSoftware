@@ -1,10 +1,7 @@
 # Attendance-Software-Demo-s
-Files you'll need to recreate the project are:
 
-1)src/Swipe.java (servlet)
+Steps to use this web-app
 
-2)src/StudentModel.java (class)
+1.Clone repository to a folder on your machine
 
-3)WebContect/WEB-INF/web.xml
-
-4)WebContent/WEB-INF/Swipe.jsp
+2.Use that folder as your workspace when using eclipse
